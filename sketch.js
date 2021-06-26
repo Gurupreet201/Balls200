@@ -19,12 +19,21 @@ function draw() {
   }
 }
 
+function mousePressed() {
+  for (let i = 0; i < balls.length; i++) {
+    balls[i].clicked();
+  }
+}
+
 class Ball {
   constructor(x, y, xs, xy) {
     this.x = x;
     this.y = y;
     this.xspeed = xs;
     this.yspeed = xy;
+    this.rc = 200;
+    this.gc = 120;
+    this.bc = 150;
   }
   move() {
     this.x += this.xspeed;
@@ -33,7 +42,7 @@ class Ball {
   display() {
     strokeWeight(2);
     stroke(0);
-    fill(200, 120, 150);
+    fill(this.rc, this.gc, this.bc);
     circle(this.x, this.y, 30);
   }
   bounce() {
@@ -44,5 +53,10 @@ class Ball {
     if (this.y > height - 15 || this.y < 15) {
       this.yspeed *= -1;
     }
+  }
+  clicked() {
+    this.rc = random(100, 200);
+    this.gc = random(100, 200);
+    this.bc = random(100, 200);
   }
 }
